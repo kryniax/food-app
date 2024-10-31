@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "./src/index.ts",
   "scripts": {
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "build": "npm install && npx tsc",
+    "start": "node dist/index.js"
   },
   "keywords": [],
   "author": "",
@@ -11,6 +13,8 @@
   "description": "",
   "type": "commonjs",
   "dependencies": {
+    "@types/multer": "^1.4.12",
+    "cloudinary": "^2.5.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
@@ -18,7 +22,8 @@
     "express-validator": "^7.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.7.0",
-    "mongoose": "^8.4.4"
+    "mongoose": "^8.4.4",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
