@@ -10,15 +10,11 @@ const createMyRestaurant = async (req: Request, res: Response) => {
         if(existingRestaurant) {
             return res.status(409).json({ message: "User restaurant already exists" });
         }
-        console.log(req.body.menuItem);
-        const image = req.file as Express.Multer.File;
-        const base64Image = Buffer.from(image.buffer).toString("base64");
-        const dataURI = `data:${image.mimetype};base64,${base64Image}`;
 
-        const uploadResponse = await cloudinary.v2.uploader.upload(dataURI);
+        const imageUrl = await uploadImage(req.file as Express.Multer.File);
 
         const restaurant = new Restaurant(req.body);
-        restaurant.imageUrl = uploadResponse.url;
+        restaurant.imageUrl = imageUrl;
         restaurant.user = new mongoose.Types.ObjectId(req.userId);
         restaurant.lastUpdated = new Date();
         await restaurant.save();
@@ -43,7 +39,56 @@ const getMyRestaurant = async (req: Request, res: Response) => {
     }
 }
 
+const updateMyRestaurant = async (req: Request, res: Response) => {
+
+    const { 
+        restaurantName, 
+        city, 
+        country, 
+        deliveryPrice, 
+        estimatedDeliveryTime, 
+        cuisines, 
+        menuItems 
+    } = req.body;
+
+    try {
+        const restaurant = await Restaurant.findOne({ user: req.userId });
+        
+        if(!restaurant) {
+            return res.status(404).json({ message: "restaurant not found"});
+        }
+
+        restaurant.restaurantName = restaurantName;
+        restaurant.city = city;
+        restaurant.country = country;
+        restaurant.deliveryPrice = deliveryPrice;
+        restaurant.estimatedDeliveryTime = estimatedDeliveryTime;
+        restaurant.cuisines = cuisines;
+        restaurant.menuItems = menuItems;
+        restaurant.lastUpdated = new Date();
+
+        if(req.file) {
+            const imageUrl = await uploadImage(req.file as Express.Multer.File);
+            restaurant.imageUrl = imageUrl;
+        }
+
+    } catch (error) {
+        console.log("error", error);
+        res.status(500).json({ message: "Error updating restaurant" });
+    }
+}
+
+const uploadImage = async (file: Express.Multer.File) => {
+    const image = file;
+    const base64Image = Buffer.from(image.buffer).toString("base64");
+    const dataURI = `data:${image.mimetype};base64,${base64Image}`;
+
+    const uploadResponse = await cloudinary.v2.uploader.upload(dataURI);
+    return uploadResponse.url;
+}
+
 export default {
     createMyRestaurant,
-    getMyRestaurant
+    getMyRestaurant,
+    updateMyRestaurant
 }
