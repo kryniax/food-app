@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useSearchRestaurants } from '../api/RestaurantApi';
 import PulseLoader from 'react-spinners/PulseLoader';
 import SearchResultsInfo from '../components/SearchResultsInfo';
+import SearchResultsCard from '../components/SearchResultsCard';
 
 const SearchPage = () => {
   const { city } = useParams();
@@ -32,6 +33,12 @@ const SearchPage = () => {
           city={city}
           total={results?.pagination.total}
         />
+        {results.data.map((restaurant) => (
+          <SearchResultsCard
+            key={restaurant.city}
+            restaurant={restaurant}
+            />
+        ))}
       </div>
     </div>
   )
