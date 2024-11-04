@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useSearchRestaurants } from '../api/RestaurantApi';
 import PulseLoader from 'react-spinners/PulseLoader';
+import SearchResultsInfo from '../components/SearchResultsInfo';
 
 const SearchPage = () => {
   const { city } = useParams();
@@ -27,7 +28,10 @@ const SearchPage = () => {
         cuisines list
       </div>
       <div id="main-content" className='flex flex-col gap-5'>
-        Main Content
+        <SearchResultsInfo
+          city={city}
+          total={results?.pagination.total}
+        />
       </div>
     </div>
   )
