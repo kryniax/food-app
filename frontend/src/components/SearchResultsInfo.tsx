@@ -15,7 +15,6 @@ const SearchResultsInfo = (props: SearchResultsInfoProps) => {
             {total} Restaurants found in {city}
             <Link to="/" className='ml-2 text-sm font-semibold underline cursor-pointer text-blue-500'>Change Location</Link>
         </span>
-        <span>sort</span>
     </div>
   )
 }
