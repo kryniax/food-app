@@ -52,7 +52,7 @@ const SearchBar = (props: SearchBarProps) => {
         <form 
             onSubmit={form.handleSubmit(onSubmit)} 
             className={
-                twMerge("flex flex-row items-center flex-1 gap-3 justify-beetwen border-2 rounded-full p-3", 
+                twMerge("flex flex-row items-center gap-3 justify-beetwen border-2 rounded-full p-3", 
                 form.formState.errors.searchQuery && 'border-red-500'
                 )}
             >
