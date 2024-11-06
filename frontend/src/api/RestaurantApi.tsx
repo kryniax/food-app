@@ -19,7 +19,13 @@ export const useGetRestaurant = (restaurantId?: string) => {
     const {
         data: restaurant,
         isLoading
-    } = useQuery("fetchRestaurant", getRestaurantByIdRequest);
+    } = useQuery(
+            "fetchRestaurant", 
+            getRestaurantByIdRequest, 
+            {
+                enabled: !!restaurantId,
+            }
+        );
 
     return { restaurant, isLoading };
 }
