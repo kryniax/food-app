@@ -31,10 +31,8 @@ export const useGetRestaurant = (restaurantId?: string) => {
 }
 
 export const useSearchRestaurants = (searchState: SearchState, city?: string) => {
-    const { getAccessTokenSilently } = useAuth0();
 
     const createSearchRequest = async (): Promise<RestaurantSearchResponse> => {
-        const accessToken = await getAccessTokenSilently();
         const params = new URLSearchParams();
         params.set("searchQuery", searchState.searchQuery);
         params.set("page", searchState.page.toString());
