@@ -24,6 +24,7 @@ interface UserProfileFormProps {
     currentUser: User;
     title?: string;
     buttonText?: string;
+    checkout: boolean;
 }
 
 const UserProfileForm = (props: UserProfileFormProps) => {
@@ -32,7 +33,8 @@ const UserProfileForm = (props: UserProfileFormProps) => {
         isLoading, 
         currentUser, 
         title ="User Profile", 
-        buttonText="Submit" 
+        buttonText="Submit",
+        checkout
     } = props;
    
    const form = useForm<UserFormData>({
@@ -55,7 +57,11 @@ const UserProfileForm = (props: UserProfileFormProps) => {
                     <h2 className='text-2xl font-bold'>{title}</h2>
                 </header>
                 <FormDescription>
-                        View and change your profile information here.
+                    {checkout ? (
+                        <span>View and change your delivery information here.</span>
+                    ) : (
+                        <span>View and change your profile information here.</span>
+                    )}
                 </FormDescription>
             </div>
             <FormField 

@@ -58,6 +58,7 @@ const CheckoutButton = (props: CheckoutButtonProps) => {
                     isLoading={isGetUserLoading}
                     title='Confirm Delivery Detail'
                     buttonText='Continue to payment'
+                    checkout
                 />
             </DialogContent>
         </Dialog>
