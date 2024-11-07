@@ -5,9 +5,10 @@ import PulseLoader from 'react-spinners/PulseLoader';
 import { AspectRatio } from '../components/ui/aspect-ratio';
 import RestaurantInfo from '../components/RestaurantInfo';
 import MenuItemComponent from '../components/MenuItem';
-import { Card } from '../components/ui/card';
+import { Card, CardFooter } from '../components/ui/card';
 import OrderSummary from '../components/OrderSummary';
 import { MenuItem } from '../types';
+import CheckoutButton from '../components/CheckoutButton';
 
 export type CartItem = {
     _id: string;
@@ -93,6 +94,9 @@ const DetailPage = () => {
                         cartItems={cartItems} 
                         removeFromCart={removeFromCart}
                     />
+                    <CardFooter>
+                        <CheckoutButton/>
+                    </CardFooter>
                 </Card>
             </div>
         </div>
