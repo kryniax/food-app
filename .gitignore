@@ -27,6 +27,7 @@ backent/dist-ssr
 **/.njsproj
 **/.sln
 **/.sw?
+**/stripe*
 
 /frontend/build
 /frontend/dist
