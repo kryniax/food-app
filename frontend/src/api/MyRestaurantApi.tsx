@@ -128,7 +128,9 @@ export const useGetMyRestaurantOrders = () => {
         if(!response.ok) {
             throw new Error("Failed to fetch orders")
         };
-    }
+
+        return response.json();
+    };
 
     const { 
         data: orders, 
